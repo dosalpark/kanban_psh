@@ -1,6 +1,7 @@
 package com.team8.kanban.domain.card.repository;
 
 import com.team8.kanban.domain.card.dto.CardCommentResponse;
+import com.team8.kanban.domain.card.dto.CardResponse;
 import com.team8.kanban.domain.card.entity.Card;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
@@ -41,4 +42,6 @@ public interface CardRepositoryCustom {
      * @return List<Card>
      */
     List<Card> findCardsBySectionId(Long sectionId);
+
+    List<CardResponse> finCardV2Cache();
 }

@@ -12,6 +12,8 @@ import java.util.List;
 
 public interface CardService {
 
+    List<CardResponse> getCardsV2Cache();
+
     /**
      * sectionId에 해당하는 section의 전체 카드 조회
      *
@@ -22,8 +24,9 @@ public interface CardService {
 
     /**
      * sectionId에 해당하는 section의 전체 카드 조회
+     *
      * @param sectionId 조회할 section의 Id값
-     * @param pageable 페이징처리 값
+     * @param pageable  페이징처리 값
      * @return
      */
     Slice<CardCommentResponse> getCards(Long sectionId, Pageable pageable);
