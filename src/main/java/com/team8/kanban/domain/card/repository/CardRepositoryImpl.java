@@ -170,4 +170,23 @@ public class CardRepositoryImpl implements CardRepositoryCustom {
                 .where(qCard.sectionId.eq(sectionId))
                 .fetch();
     }
+
+    @Override
+    public List<CardResponse> finCardV2Cache() {
+        return jpaConfig.jpaQueryFactory().
+                select(Projections.fields(CardResponse.class,
+                        qCard.cardId,
+                        qCard.cardName,
+                        qCard.description,
+                        qUser.username,
+                        qCard.expiredDate,
+                        qCard.createdAt,
+                        qCard.modifiedAt,
+                        qCard.sectionId,
+                        qCard.position
+                ))
+                .from(qCard)
+                .leftJoin(qUser).on(qUser.id.lt(qCard.userid))
+                .fetch();
+    }
 }

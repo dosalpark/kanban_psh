@@ -8,12 +8,12 @@ import com.team8.kanban.domain.card.entity.Card;
 import com.team8.kanban.domain.card.entity.CardUser;
 import com.team8.kanban.domain.card.repository.CardRepository;
 import com.team8.kanban.domain.card.repository.CardUserRepository;
-
 import com.team8.kanban.domain.comment.repository.CommentRepository;
 import com.team8.kanban.domain.user.User;
 import com.team8.kanban.domain.user.UserRepository;
 import com.team8.kanban.global.entity.ColorEnum;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
@@ -30,6 +30,12 @@ public class CardServiceImpl implements CardService {
     private final CardUserRepository cardUserRepository;
     private final UserRepository userRepository;
     private final CommentRepository commentRepository;
+
+    @Override
+    @Cacheable("allCard")
+    public List<CardResponse> getCardsV2Cache() {
+        return cardRepository.finCardV2Cache();
+    }
 
     @Override
     @Transactional(readOnly = true)
